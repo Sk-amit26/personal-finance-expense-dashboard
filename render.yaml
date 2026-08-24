@@ -2,6 +2,7 @@ services:
   - type: web
     name: personal-finance-expense-dashboard
     runtime: node
+    plan: free
     buildCommand: npm install
     startCommand: npm start
     healthCheckPath: /api/health
