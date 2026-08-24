@@ -1,0 +1,1 @@
+const router = require('express').Router(); const c = require('../controllers/analyticsController'); const protect = require('../middleware/authMiddleware'); router.use(protect); router.get('/summary', c.summary); router.get('/category', c.category); router.get('/monthly', c.monthly); module.exports = router;
