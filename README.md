@@ -7,6 +7,8 @@ A full-stack personal finance application where each registered user can securel
 - User-isolated transaction CRUD with type, category and month filters
 - MongoDB-powered income, expense, savings and transaction-count totals
 - Monthly, category, and expense-trend charts
+- Smart financial-health score, month-end expense forecast, and unusual-spending alerts
+- Monthly category Budget Guard with real-time progress tracking
 - Responsive vanilla HTML/CSS/JavaScript interface
 
 ## Stack and architecture
@@ -35,6 +37,9 @@ The repository includes `render.yaml`. Push it to GitHub, then in Render choose 
 | GET | `/api/analytics/summary` | JWT |
 | GET | `/api/analytics/category` | JWT |
 | GET | `/api/analytics/monthly` | JWT |
+| GET | `/api/analytics/insights` | JWT |
+| GET, POST | `/api/budgets` | JWT |
+| PUT, DELETE | `/api/budgets/:id` | JWT |
 
 ## Testing
 The API is ready for Postman using `Authorization: Bearer <token>` on protected requests. Automated syntax checks can be run with `node --check` on server/browser JavaScript. A MongoDB instance is required for live end-to-end API tests.

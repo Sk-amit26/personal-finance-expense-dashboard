@@ -48,7 +48,10 @@ Register → User pre-save hook hashes the password with bcrypt → MongoDB save
 Create: `POST /api/transactions`. Read: `GET /api/transactions`. Update: `PUT /api/transactions/:id`. Delete: `DELETE /api/transactions/:id`. Update/delete use `{ _id, userId: req.user.id }`, so another user’s id returns 404 instead of granting access.
 
 ## 11. Analytics
-`summary` groups a user’s transactions by `type`, then calculates savings as income minus expense. `category` filters to expense then groups by category. `monthly` groups by year, month, and type, then reshapes results into `{month, income, expenses}`. These are MongoDB aggregation results, never dashboard constants.
+`summary` groups a user’s transactions by `type`, then calculates savings as income minus expense. `category` filters to expense then groups by category. `monthly` groups by year, month, and type, then reshapes results into `{month, income, expenses}`. The `insights` endpoint calculates a health score, current-month spending projection, top category, and unusual-expense signal from actual transaction records. These are MongoDB-derived values, never dashboard constants.
+
+### Budget Guard
+The `budgets` collection stores a user/category/month/limit record. The budget API totals that category’s current-month expenses and returns its live `spent` value. The dashboard draws the progress bar and warning state from that response.
 
 ## 12. Charts
 `dashboard.js` fetches summary/category/monthly together. Monthly labels and values form a bar chart for income vs expenses and a line chart for expenses. Category labels/totals form a doughnut chart. Charts are destroyed before redraw to prevent duplicate canvas instances.
