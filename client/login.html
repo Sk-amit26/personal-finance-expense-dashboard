@@ -1,1 +1,43 @@
-<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Log in | Moneywise</title><link rel="stylesheet" href="/css/style.css"><link rel="stylesheet" href="/css/auth.css"></head><body class="auth-page"><main class="auth-card"><a class="brand" href="/">Money<span>wise</span></a><h1>Welcome back</h1><p>Log in to manage your finances.</p><form data-mode="login"><div class="field"><label>Email</label><input required type="email" name="email" autocomplete="email"></div><div class="field"><label>Password</label><input required type="password" name="password" autocomplete="current-password"></div><p class="message"></p><button class="button">Log in</button></form><div class="auth-foot">New here? <a href="/register.html">Create an account</a></div></main><script src="/js/api.js"></script><script src="/js/auth.js"></script></body></html>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Log in | Moneywise</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/auth.css">
+</head>
+<body class="auth-page">
+  <main class="auth-card">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px">
+      <a class="brand" href="/">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+        Money<span>wise</span>
+      </a>
+      <button class="theme-toggle" aria-label="Toggle theme">🌙</button>
+    </div>
+    <h1>Welcome back</h1>
+    <p>Log in to access your financial command center.</p>
+    <form data-mode="login">
+      <div class="field">
+        <label>Email Address</label>
+        <input required type="email" name="email" autocomplete="email" placeholder="you@example.com">
+      </div>
+      <div class="field">
+        <label>Password</label>
+        <input required type="password" name="password" autocomplete="current-password" placeholder="••••••••">
+      </div>
+      <p class="message"></p>
+      <button class="button" id="submit-btn">Log in to Dashboard</button>
+    </form>
+    <div class="auth-foot">
+      New here? <a href="/register.html">Create an account</a>
+    </div>
+  </main>
+  <script src="/js/api.js"></script>
+  <script src="/js/auth.js"></script>
+</body>
+</html>

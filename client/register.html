@@ -1,1 +1,51 @@
-<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Create account | Moneywise</title><link rel="stylesheet" href="/css/style.css"><link rel="stylesheet" href="/css/auth.css"></head><body class="auth-page"><main class="auth-card"><a class="brand" href="/">Money<span>wise</span></a><h1>Create account</h1><p>Start building a clearer financial picture.</p><form data-mode="register"><div class="field"><label>Name</label><input required name="name" maxlength="60" autocomplete="name"></div><div class="field"><label>Email</label><input required type="email" name="email" autocomplete="email"></div><div class="field"><label>Password</label><input required type="password" name="password" minlength="6" autocomplete="new-password"></div><div class="field"><label>Confirm password</label><input required type="password" name="confirmPassword" minlength="6" autocomplete="new-password"></div><p class="message"></p><button class="button">Create account</button></form><div class="auth-foot">Already registered? <a href="/login.html">Log in</a></div></main><script src="/js/api.js"></script><script src="/js/auth.js"></script></body></html>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Create account | Moneywise</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/auth.css">
+</head>
+<body class="auth-page">
+  <main class="auth-card">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px">
+      <a class="brand" href="/">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+        Money<span>wise</span>
+      </a>
+      <button class="theme-toggle" aria-label="Toggle theme">🌙</button>
+    </div>
+    <h1>Create account</h1>
+    <p>Start tracking and growing your wealth in private.</p>
+    <form data-mode="register">
+      <div class="field">
+        <label>Your Name</label>
+        <input required name="name" maxlength="60" autocomplete="name" placeholder="John Doe">
+      </div>
+      <div class="field">
+        <label>Email Address</label>
+        <input required type="email" name="email" autocomplete="email" placeholder="you@example.com">
+      </div>
+      <div class="field">
+        <label>Password</label>
+        <input required type="password" name="password" minlength="6" autocomplete="new-password" placeholder="At least 6 characters">
+      </div>
+      <div class="field">
+        <label>Confirm Password</label>
+        <input required type="password" name="confirmPassword" minlength="6" autocomplete="new-password" placeholder="Repeat password">
+      </div>
+      <p class="message"></p>
+      <button class="button" id="submit-btn">Create Free Account</button>
+    </form>
+    <div class="auth-foot">
+      Already registered? <a href="/login.html">Log in here</a>
+    </div>
+  </main>
+  <script src="/js/api.js"></script>
+  <script src="/js/auth.js"></script>
+</body>
+</html>

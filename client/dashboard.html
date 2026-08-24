@@ -1,1 +1,148 @@
-<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Dashboard | Moneywise</title><link rel="stylesheet" href="/css/style.css"><link rel="stylesheet" href="/css/dashboard.css"><script src="https://cdn.jsdelivr.net/npm/chart.js"></script></head><body><nav class="nav"><a class="brand" href="/dashboard.html">Money<span>wise</span></a><div class="nav-links"><a class="active" href="/dashboard.html">Dashboard</a><a href="/transactions.html">Transactions</a><span id="user-name"></span><button id="logout" class="button secondary">Log out</button></div></nav><main class="container"><div class="page-heading"><div><p class="eyebrow">LIVE FINANCIAL INTELLIGENCE</p><h1>Your financial command center</h1><p>Every metric is calculated from your private transaction data.</p></div><a class="button" href="/transactions.html">+ Add transaction</a></div><section class="kpis"><article class="kpi"><label>TOTAL INCOME</label><strong id="income" class="income">₹0</strong></article><article class="kpi"><label>TOTAL EXPENSES</label><strong id="expenses" class="expense">₹0</strong></article><article class="kpi"><label>SAVINGS</label><strong id="savings">₹0</strong></article><article class="kpi"><label>TRANSACTIONS</label><strong id="count">0</strong></article></section><section class="panel insights-panel"><div class="panel-top"><div><p class="eyebrow">SMART INSIGHTS</p><h2>What your money is telling you</h2></div><span class="live-dot">Live analysis</span></div><div id="insights" class="insights"><p class="empty">Loading insights…</p></div></section><section class="dashboard-grid"><article class="panel budget-panel"><div class="panel-top"><div><h2>Budget Guard</h2><p>Set category limits and track them in real time.</p></div></div><form id="budget-form" class="budget-form"><select id="budget-category" required><option>Food</option><option>Transport</option><option>Shopping</option><option>Bills</option><option>Entertainment</option><option>Education</option><option>Health</option><option>Other</option></select><input id="budget-limit" type="number" min="1" step="1" placeholder="Monthly limit (₹)" required><button class="button">Set budget</button></form><div id="budgets" class="budget-list"><p class="empty">No monthly budgets yet.</p></div></article><article class="panel pulse-panel"><p class="eyebrow">SPENDING PULSE</p><h2 id="pulse-title">Tracking your monthly pace</h2><p id="pulse-text" class="muted">Add expenses to unlock a monthly forecast.</p><div class="pulse-orbit"><strong id="forecast">₹0</strong><span>projected<br>this month</span></div></article></section><section class="charts"><article class="panel"><h2>Income vs expenses by month</h2><div class="chart-wrap"><canvas id="incomeChart"></canvas></div></article><article class="panel"><h2>Expenses by category</h2><div class="chart-wrap"><canvas id="categoryChart"></canvas></div></article><article class="panel wide"><h2>Monthly expense trend</h2><div class="chart-wrap"><canvas id="trendChart"></canvas></div></article></section></main><div class="toast"></div><script src="/js/api.js"></script><script src="/js/dashboard.js"></script></body></html>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dashboard | Moneywise</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/dashboard.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <nav class="nav">
+    <a class="brand" href="/dashboard.html">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+      Money<span>wise</span>
+    </a>
+    <button class="mobile-menu-btn" aria-label="Toggle navigation">☰</button>
+    <div class="nav-links">
+      <a class="active" href="/dashboard.html">Dashboard</a>
+      <a href="/transactions.html">Transactions</a>
+      <a href="/goals.html">Goals</a>
+      <a href="/tools.html">Tools</a>
+    </div>
+    <div class="nav-actions">
+      <span class="user-badge" id="user-name">User</span>
+      <button class="theme-toggle" aria-label="Toggle theme">🌙</button>
+      <button id="logout" class="button secondary small">Log out</button>
+      <button id="delete-account-btn" class="button danger small" title="Permanently delete account">Delete</button>
+    </div>
+
+  </nav>
+
+  <main class="container">
+    <div class="page-heading">
+      <div>
+        <p class="eyebrow">LIVE FINANCIAL INTELLIGENCE</p>
+        <h1>Financial Command Center</h1>
+        <p>Real-time analytics and predictive forecasts computed from your private records.</p>
+      </div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap">
+        <a class="button secondary" href="/transactions.html">📥 Import CSV</a>
+        <a class="button" href="/transactions.html">+ Add transaction</a>
+      </div>
+
+
+    <section class="kpis">
+      <article class="kpi income-card">
+        <label>Total Income</label>
+        <strong id="income" class="income">₹0</strong>
+        <small>All recorded inflows</small>
+      </article>
+      <article class="kpi expense-card">
+        <label>Total Expenses</label>
+        <strong id="expenses" class="expense">₹0</strong>
+        <small>All recorded outflows</small>
+      </article>
+      <article class="kpi savings-card">
+        <label>Net Savings</label>
+        <strong id="savings">₹0</strong>
+        <small id="savings-rate-label">0% savings rate</small>
+      </article>
+      <article class="kpi count-card">
+        <label>Transactions</label>
+        <strong id="count">0</strong>
+        <small>Total records stored</small>
+      </article>
+    </section>
+
+    <section class="panel insights-panel">
+      <div class="panel-top">
+        <div>
+          <p class="eyebrow">SMART SIGNALS</p>
+          <h2>Intelligence & Anomaly Detection</h2>
+        </div>
+        <span class="live-dot">Live analysis</span>
+      </div>
+      <div id="insights" class="insights">
+        <div class="skeleton" style="height:90px"></div>
+        <div class="skeleton" style="height:90px"></div>
+        <div class="skeleton" style="height:90px"></div>
+        <div class="skeleton" style="height:90px"></div>
+      </div>
+    </section>
+
+    <section class="dashboard-grid">
+      <article class="panel budget-panel">
+        <div class="panel-top">
+          <div>
+            <h2>Category Budget Guard</h2>
+            <p>Set dynamic monthly spending limits and monitor threshold warnings.</p>
+          </div>
+        </div>
+        <form id="budget-form" class="budget-form">
+          <select id="budget-category" required>
+            <option>Food</option>
+            <option>Transport</option>
+            <option>Shopping</option>
+            <option>Bills</option>
+            <option>Entertainment</option>
+            <option>Education</option>
+            <option>Health</option>
+            <option>Other</option>
+          </select>
+          <input id="budget-limit" type="number" min="1" step="1" placeholder="Monthly limit (₹)" required>
+          <button class="button">Set limit</button>
+        </form>
+        <div id="budgets" class="budget-list">
+          <p class="empty">Loading budgets...</p>
+        </div>
+      </article>
+
+      <article class="panel pulse-panel">
+        <div>
+          <p class="eyebrow">SPENDING PACE</p>
+          <h2 id="pulse-title">Tracking Monthly Pace</h2>
+          <p id="pulse-text" class="muted">Add expenses to unlock predictive forecasting.</p>
+        </div>
+        <div class="pulse-orbit">
+          <strong id="forecast">₹0</strong>
+          <span>projected<br>this month</span>
+        </div>
+      </article>
+    </section>
+
+    <section class="charts">
+      <article class="panel">
+        <h2>Income vs Expenses by Month</h2>
+        <div class="chart-wrap"><canvas id="incomeChart"></canvas></div>
+      </article>
+      <article class="panel">
+        <h2>Expenses by Category</h2>
+        <div class="chart-wrap"><canvas id="categoryChart"></canvas></div>
+      </article>
+      <article class="panel wide">
+        <h2>Monthly Expense Trajectory</h2>
+        <div class="chart-wrap"><canvas id="trendChart"></canvas></div>
+      </article>
+    </section>
+  </main>
+
+  <div class="toast"></div>
+  <script src="/js/api.js"></script>
+  <script src="/js/dashboard.js"></script>
+</body>
+</html>

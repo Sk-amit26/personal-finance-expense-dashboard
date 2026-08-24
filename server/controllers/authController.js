@@ -1,5 +1,10 @@
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
+const Transaction = require('../models/Transaction');
+const Budget = require('../models/Budget');
+const Goal = require('../models/Goal');
+const RecurringTransaction = require('../models/RecurringTransaction');
+
 const tokenFor = user => jwt.sign({ id: user._id, name: user.name }, process.env.JWT_SECRET, { expiresIn: process.env.JWT_EXPIRES_IN || '7d' });
 const publicUser = user => ({ id: user._id, name: user.name, email: user.email, createdAt: user.createdAt });
 
@@ -12,6 +17,7 @@ exports.register = async (req, res, next) => {
     res.status(201).json({ token: tokenFor(user), user: publicUser(user) });
   } catch (err) { next(err); }
 };
+
 exports.login = async (req, res, next) => {
   try {
     const { email, password } = req.body;
@@ -21,3 +27,20 @@ exports.login = async (req, res, next) => {
     res.json({ token: tokenFor(user), user: publicUser(user) });
   } catch (err) { next(err); }
 };
+
+exports.deleteAccount = async (req, res, next) => {
+  try {
+    const userId = req.user.id;
+    await Promise.all([
+      Transaction.deleteMany({ userId }),
+      Budget.deleteMany({ userId }),
+      Goal.deleteMany({ userId }),
+      RecurringTransaction.deleteMany({ userId }),
+      User.findByIdAndDelete(userId)
+    ]);
+    res.json({ message: 'Your account and all associated financial records have been permanently erased.' });
+  } catch (err) {
+    next(err);
+  }
+};
+

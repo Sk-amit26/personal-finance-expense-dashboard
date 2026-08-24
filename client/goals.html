@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Savings Goals | Moneywise</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/goals.css">
+</head>
+<body>
+  <nav class="nav">
+    <a class="brand" href="/dashboard.html">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+      Money<span>wise</span>
+    </a>
+    <button class="mobile-menu-btn" aria-label="Toggle navigation">☰</button>
+    <div class="nav-links">
+      <a href="/dashboard.html">Dashboard</a>
+      <a href="/transactions.html">Transactions</a>
+      <a class="active" href="/goals.html">Goals</a>
+      <a href="/tools.html">Tools</a>
+    </div>
+    <div class="nav-actions">
+      <span class="user-badge" id="user-name">User</span>
+      <button class="theme-toggle" aria-label="Toggle theme">🌙</button>
+      <button id="logout" class="button secondary small">Log out</button>
+      <button id="delete-account-btn" class="button danger small" title="Permanently delete account">Delete</button>
+    </div>
+
+  </nav>
+
+  <main class="container">
+    <div class="page-heading">
+      <div>
+        <p class="eyebrow">WEALTH ACCUMULATION</p>
+        <h1>Savings Goals & Milestones</h1>
+        <p>Set dedicated targets, track progress, and project completion dates based on your savings velocity.</p>
+      </div>
+      <button id="open-goal-form-btn" class="button">+ Create New Goal</button>
+    </div>
+
+    <!-- Create Goal Panel (collapsible) -->
+    <section id="goal-form-panel" class="panel" style="display:none">
+      <h2 id="goal-form-title">Create Savings Goal</h2>
+      <form id="goal-form" class="form-grid">
+        <div class="field">
+          <label>Goal Name</label>
+          <input required name="name" id="goal-name" placeholder="e.g. Emergency Fund / MacBook Pro">
+        </div>
+        <div class="field">
+          <label>Target Amount (₹)</label>
+          <input required min="1" step="1" type="number" name="targetAmount" id="goal-target" placeholder="100000">
+        </div>
+        <div class="field">
+          <label>Already Saved (₹)</label>
+          <input min="0" step="1" type="number" name="savedAmount" id="goal-saved" placeholder="0">
+        </div>
+        <div class="field">
+          <label>Target Deadline (Optional)</label>
+          <input type="date" name="deadline" id="goal-deadline">
+        </div>
+        <div class="field">
+          <label>Icon Emoji</label>
+          <select name="icon" id="goal-icon">
+            <option value="🎯">🎯 Target</option>
+            <option value="🛡️">🛡️ Emergency</option>
+            <option value="💻">💻 Tech / Gadget</option>
+            <option value="🚗">🚗 Vehicle</option>
+            <option value="🏠">🏠 House</option>
+            <option value="✈️">✈️ Vacation</option>
+            <option value="💍">💍 Wedding</option>
+            <option value="🎓">🎓 Education</option>
+            <option value="📈">📈 Investment</option>
+          </select>
+        </div>
+        <button class="button" style="grid-column:1/-1;justify-self:start">Save Goal</button>
+      </form>
+    </section>
+
+    <!-- Goals Grid -->
+    <div id="goals-container" class="goals-grid">
+      <p class="empty" style="grid-column:1/-1">Loading savings goals...</p>
+    </div>
+  </main>
+
+  <div class="toast"></div>
+  <script src="/js/api.js"></script>
+  <script src="/js/goals.js"></script>
+</body>
+</html>
